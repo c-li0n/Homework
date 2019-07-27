@@ -1,0 +1,38 @@
+Sub tickerVolumeCounter()
+
+Dim ticker As String
+Dim TickerVolume As Long
+Dim TickerTotal As Double
+Dim i As Integer
+Dim irow As Long
+Dim lastrow As Long
+
+For lastrow = 2 To 100000
+If (Cells(lastrow + 1, 1).Value = "") Then
+Exit For
+End If
+Next lastrow
+
+i = 2
+
+For irow = 2 To lastrow
+
+If Cells(irow, 1).Value = Cells((irow + 1), 1).Value Then
+TickerVolume = Cells(irow, 7).Value
+TickerTotal = TickerTotal + TickerVolume
+ticker = Cells(irow, 1).Value
+Else
+TickerVolume = Cells(irow, 7).Value
+TickerTotal = TickerVolume + TickerTotal
+ticker = Cells(irow, 1).Value
+Cells(i, 9).Value = ticker
+Cells(i, 10).Value = TickerTotal
+i = i + 1
+TickerTotal = 0
+
+End If
+
+Next irow
+
+End Sub
+
